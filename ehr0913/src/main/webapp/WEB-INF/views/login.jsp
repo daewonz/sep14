@@ -295,18 +295,34 @@ $(function(){
 					data : {idPW : idPW , name: name, pnum : pnum},
 					dataType : "json",
 					success:function(data){
-						alert(data.result.ename);
+					if(data.result.ename != null && data.result.eid != null && data.result.eemail2 != null){
 						if(data.error == null){
-						$(".PWResult").text("임시 비밀번호를 " + data.result.ename+" 님께서 등록한 개인 이메일인 "+data.result.email2 +"로 보냈습니다. 메일을 확인해주세요.").css({
+							$(".PWResult").text("임시 비밀번호를 " + data.result.ename+" 님께서 등록한 개인 이메일인 "+data.result.email2 +"로 보냈습니다. 메일을 확인해주세요.").css({
+							    "text-align": "center", // 가운데 정렬
+							    "font-size": "23px", // 글꼴 크기
+							    "font-weight": "bold" // 글꼴 굵기
+							});	
+							$(".login-result").show();
+							
+							}else{
+								$(".PWResult").text(data.error);
+							
+							}//data.error == null 끝부분
+					}else{
+						
+						$(".PWResult").text("입력하신 정보가 일치하지 않습니다. 확인 후 다시 시도해주세요.").css({
 						    "text-align": "center", // 가운데 정렬
 						    "font-size": "23px", // 글꼴 크기
 						    "font-weight": "bold" // 글꼴 굵기
+	
 						});	
-						$(".login-result").show();
-						
-					}else{
-						$(".PWResult").text(data.error);
+						$(".fbtnPW").prop("disabled", false);
+						return false;
 					}
+						
+					
+						
+		
 					},
 					error : function(error){
 						alert("ㅠㅠ");

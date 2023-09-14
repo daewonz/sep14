@@ -47,30 +47,35 @@
     </div>
     <div class="item">
      <div class="nameset1">신규입사자<br></div>
-    <div class="slideshow-container">
+<div class="slideshow-container">
 
 <div class="mySlides fade">
   <div class="numbertext">1 / 2</div>
-  <img class="pic" src="./upload/${newM[0].eimg }" style= width:100px" height="100px">
+    <img class="pic" src="./upload/${newM[0].eimg }" style= width:100px" height="100px">
    <br><br><br>
     <div class="nameset2"> ${newM[0].edept }<br></div>
     <div class="nameset3"> ${newM[0].ename }<br></div>
     <div class="nameset4">${newM[0].ehiredate } 입사</div>
+
 </div>
 
 <div class="mySlides fade">
   <div class="numbertext">2 / 2</div>
-  <img class="pic" src="./upload/noimg2.png" style="width:100px" height="100px">
+    <img class="pic" src="./upload/${newM[1].eimg }" style="width:100px" height="100px">
   <br><br><br> 
     <div class="nameset2"> ${newM[1].edept }<br></div>
     <div class="nameset3"> ${newM[1].ename }<br></div>
     <div class="nameset4">${newM[1].ehiredate } 입사</div>
+
 </div>
-
-
+<br>
 <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
 <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
 </div>
 
     <br><br>
@@ -94,31 +99,25 @@
 
 
 <script type="text/javascript">
-var slideIndex = 1;
-showSlides(slideIndex);
+var slideIndex = 0;
+showSlides();
 
-function plusSlides(n) {
-  showSlides(slideIndex += n);
+function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+       slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {slideIndex = 1}    
+    for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex-1].style.display = "block";  
+    dots[slideIndex-1].className += " active";
+    setTimeout(showSlides, 2000); // Change image every 2 seconds
 }
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-function showSlides(n) {
-	  var i;
-	  var slides = document.getElementsByClassName("mySlides");
-	  var dots = document.getElementsByClassName("dot");
-	  if (n > slides.length) {slideIndex = 1}    
-	  if (n < 1) {slideIndex = slides.length}
-	  for (i = 0; i < slides.length; i++) {
-	      slides[i].style.display = "none";  
-	  }
-	  for (i = 0; i < dots.length; i++) {
-	      dots[i].className = dots[i].className.replace(" active", "");
-	  }
-	  slides[slideIndex-1].style.display = "block";  
-	  dots[slideIndex-1].className += " active";
-	}
 </script>
 
 </body>
